@@ -7,15 +7,16 @@
 </head>
 <body>
     <script>
+        //Declare variables
         let rock = "rock";
         let paper = "paper";
         let scissors = "scissors";
-
         let humanScore = 0;
         let computerScore = 0;
         let replayGame = false;
         let gameOver = false;
 
+        //Create getHumanChoice function
         function getComputerChoice(){
             let randomValue = Math.random();
             if (randomValue <= 0.33) {
@@ -27,6 +28,7 @@
             }
         }
         
+        //Create getHumanChoice function
         function getHumanChoice(){
            let humanChoice = '';
            while (true) {
@@ -40,13 +42,14 @@
            }
         }
 
+        //Create playRound function
         function playRound(){
             let humanChoice = getHumanChoice();
             let computerChoice = getComputerChoice();
-            if (humanChoice === computerChoice) {
+            if (humanChoice === computerChoice) {//Draw
                 console.log("Draw!");
                 alert("Draw!");
-            } else if (
+            } else if (//Win
                 (humanChoice === rock && computerChoice === scissors) ||
                 (humanChoice === paper && computerChoice === rock) ||
                 (humanChoice === scissors && computerChoice === paper)
@@ -54,7 +57,7 @@
                 humanScore++;
                 console.log("Win!");
                 alert("Win!");
-            } else if (
+            } else if (//Lose
                 (humanChoice === rock && computerChoice === paper) ||
                 (humanChoice === paper && computerChoice === scissors) ||
                 (humanChoice === scissors && computerChoice === rock)
@@ -63,10 +66,14 @@
                 console.log("Lose!");
                 alert("Lose!");
             }
+
+            //Checks for winning/losing score
             if (computerScore >= 3 || humanScore >= 3) {
-                console.log("Gameover!");
+                console.log("We have a winner!");
                 gameOver = true;
             }
+
+            //Display round outcome
             console.log(`Scores - Human: ${humanScore}, Computer: ${computerScore}`);
             alert(`Scores - Human: ${humanScore}, Computer: ${computerScore}`);
             if (gameOver == true && humanScore >= 3) {
@@ -74,6 +81,8 @@
             } else if (gameOver = true && computerScore >= 3){
                 alert("You suck and died to the computer!");
             }
+
+            //New round or new game
             replayGame = confirm("Want to play again?");
             if (replayGame == true && gameOver == true) {
                 humanScore = 0;
