@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <script>
+        let rock = "rock";
+        let paper = "paper";
+        let scissors = "scissors";
+
+        let humanScore = 0;
+        let computerScore = 0;
+        let replayGame = false;
+        let gameOver = false;
+
+        function getComputerChoice(){
+            let randomValue = Math.random();
+            if (randomValue <= 0.33) {
+                return rock;
+            } else if (randomValue <= 0.66){
+                return paper;
+            } else {
+                return scissors;
+            }
+        }
+        
+        function getHumanChoice(){
+           let humanChoice = '';
+           while (true) {
+            humanChoice = prompt("First to 3 wins. Make your choice. (rock, paper, or scissors)").toLowerCase();
+            if (humanChoice === rock || humanChoice === paper || humanChoice === scissors) {
+                return humanChoice;
+            } else {
+                console.log("Not a valid choice, try again.");
+                alert("Not a valid choice, try again.");
+            }
+           }
+        }
+
+        function playRound(){
+            let humanChoice = getHumanChoice();
+            let computerChoice = getComputerChoice();
+            if (humanChoice === computerChoice) {
+                console.log("Draw!");
+                alert("Draw!");
+            } else if (
+                (humanChoice === rock && computerChoice === scissors) ||
+                (humanChoice === paper && computerChoice === rock) ||
+                (humanChoice === scissors && computerChoice === paper)
+            ) {
+                humanScore++;
+                console.log("Win!");
+                alert("Win!");
+            } else if (
+                (humanChoice === rock && computerChoice === paper) ||
+                (humanChoice === paper && computerChoice === scissors) ||
+                (humanChoice === scissors && computerChoice === rock)
+            ) {
+                computerScore++;
+                console.log("Lose!");
+                alert("Lose!");
+            }
+            if (computerScore >= 3 || humanScore >= 3) {
+                console.log("Gameover!");
+                gameOver = true;
+            }
+            console.log(`Scores - Human: ${humanScore}, Computer: ${computerScore}`);
+            alert(`Scores - Human: ${humanScore}, Computer: ${computerScore}`);
+            if (gameOver == true && humanScore >= 3) {
+                alert("Congratulations! You killed the computer!");
+            } else if (gameOver = true && computerScore >= 3){
+                alert("You suck and died to the computer!");
+            }
+            replayGame = confirm("Want to play again?");
+            if (replayGame == true && gameOver == true) {
+                humanScore = 0;
+                computerScore = 0;
+                gameOver = false;
+                playRound();
+            } else if (replayGame == true) {
+                playRound();
+            } else {
+                alert("Thanks for playing!");
+            }
+        }
+
+        playRound();
+    </script>
+</body>
+</html>
